@@ -23,4 +23,13 @@ public class PositionTest {
 
         assertEquals(new Position(0, -1), result);
     }
+
+    @Test
+    void moveForwardWhenFacingEastIncrementsX() {
+        Position start = new Position(0, 0);
+
+        Position result = start.moveForward(Direction.EAST);
+
+        assertEquals(new Position(1, 0), result);
+    }
 }
