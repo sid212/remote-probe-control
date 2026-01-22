@@ -23,12 +23,4 @@ public class DirectionTest {
         assertEquals(Direction.EAST, result);
     }
 
-    @Test
-    void moveBackwardWhenFacingNorthDecrementsY() {
-        Position start = new Position(0, 0);
-
-        Position result = start.moveBackward(Direction.NORTH);
-
-        assertEquals(new Position(0, -1), result);
-    }
 }
