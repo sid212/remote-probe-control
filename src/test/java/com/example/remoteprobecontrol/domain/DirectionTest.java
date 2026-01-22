@@ -13,4 +13,13 @@ public class DirectionTest {
 
         assertEquals(Direction.WEST, result);
     }
+
+    @Test
+    void northTurnsRightToEast() {
+        Direction direction = Direction.NORTH;
+
+        Direction result = direction.turnRight();
+
+        assertEquals(Direction.EAST, result);
+    }
 }
