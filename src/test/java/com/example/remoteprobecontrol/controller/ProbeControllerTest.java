@@ -76,4 +76,30 @@ public class ProbeControllerTest {
                         .content(request))
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    void executeCommandsReturnsFinalProbeStaste() throws Exception {
+        String request = """
+                {
+                     "grid": {
+                         "width": 5,
+                         "height": 5
+                     },
+                     "start": {
+                         "x": 0,
+                         "y": 0,
+                         "direction": "NORTH"
+                     },
+                     "commands": "FF"
+                 }
+        """;
+
+        mockMvc.perform(post("/probe/execute")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.finalPosition.x").value(0))
+                .andExpect(jsonPath("$.finalPosition.y").value(2))
+                .andExpect(jsonPath("$.direction").value("NORTH"));
+    }
 }
