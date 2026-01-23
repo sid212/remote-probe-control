@@ -60,4 +60,20 @@ public class ProbeControllerTest {
                         .content(request))
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    void returnsBadRequestForInvalidCommand() throws Exception {
+        String request = """
+    {
+      "grid": { "width": 5, "height": 5, "obstacles": [] },
+      "start": { "x": 0, "y": 0, "direction": "NORTH" },
+      "commands": "FXR"
+    }
+    """;
+
+        mockMvc.perform(post("/probe/execute")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request))
+                .andExpect(status().isBadRequest());
+    }
 }
