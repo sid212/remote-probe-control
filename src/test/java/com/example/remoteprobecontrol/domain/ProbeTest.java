@@ -2,6 +2,8 @@ package com.example.remoteprobecontrol.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProbeTest {
@@ -55,6 +57,23 @@ public class ProbeTest {
 
         assertEquals(new Position(0,2), result.getPosition());
         assertEquals(Direction.EAST, result.getDirection());
+    }
+
+    @Test
+    void probeTracksVisitedPositionsWhileMoving() {
+        Grid grid = new Grid(5,5);
+        Probe probe = new Probe(new Position(0,0), Direction.NORTH, grid);
+
+        Probe result = probe.execute("FFR");
+
+        assertEquals(
+                List.of(
+                        new Position(0,0),
+                        new Position(0,1),
+                        new Position(0,2)
+                ),
+                result.getVisited()
+        );
     }
 
 }
