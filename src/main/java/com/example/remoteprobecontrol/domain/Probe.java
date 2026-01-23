@@ -35,5 +35,19 @@ public class Probe {
         return direction;
     }
 
+    public Probe execute(String commands) {
+        Probe current = this;
+        for(char command : commands.toCharArray())
+            current = switch (command) {
+                case 'F' -> current.moveForward();
+                case 'B' -> current.moveBackward();
+                case 'L' -> current.turnLeft();
+                case 'R' -> current.turnRight();
+                default  -> throw new IllegalArgumentException(
+                        "Unknown command: " + command
+                );
+            };
+        return current;
+    }
 
 }

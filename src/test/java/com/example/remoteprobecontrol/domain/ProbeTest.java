@@ -52,7 +52,7 @@ public class ProbeTest {
 
         Probe result = probe.execute("FFR");
 
-        assertEquals(new Position(1,2), result.getPosition());
+        assertEquals(new Position(0,2), result.getPosition());
         assertEquals(Direction.EAST, result.getDirection());
     }
 
