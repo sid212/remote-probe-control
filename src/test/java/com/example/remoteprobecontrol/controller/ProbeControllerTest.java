@@ -78,7 +78,7 @@ public class ProbeControllerTest {
     }
 
     @Test
-    void executeCommandsReturnsFinalProbeStaste() throws Exception {
+    void executeWhenObstracleIsNotPresent() throws Exception {
         String request = """
                 {
                      "grid": {
@@ -100,6 +100,31 @@ public class ProbeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.finalPosition.x").value(0))
                 .andExpect(jsonPath("$.finalPosition.y").value(2))
+                .andExpect(jsonPath("$.direction").value("NORTH"));
+    }
+
+    void PassingInvalidGridShouldReturnBadRequest() throws Exception {
+        String request = """
+                {
+                     "grid": {
+                         "width": -1,
+                         "height": -1
+                     },
+                     "start": {
+                         "x": 0,
+                         "y": 0,
+                         "direction": "NORTH"
+                     },
+                     "commands": "FF"
+                 }
+        """;
+
+        mockMvc.perform(post("/probe/execute")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.finalPosition.x").value(0))
+                .andExpect(jsonPath("$.finalPosition.y").value(0))
                 .andExpect(jsonPath("$.direction").value("NORTH"));
     }
 }
