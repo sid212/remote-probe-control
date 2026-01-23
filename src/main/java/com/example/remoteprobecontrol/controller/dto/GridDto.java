@@ -8,6 +8,12 @@ public record GridDto (
     Set<ObstracleDto> obstacles){
 
     public GridDto {
+        if (width <= 0) {
+            throw new IllegalArgumentException("Width must be positive");
+        }
+        if (height <= 0) {
+            throw new IllegalArgumentException("Height must be positive");
+        }
         if (obstacles == null) {
             obstacles = Set.of(); // default empty set
         }
