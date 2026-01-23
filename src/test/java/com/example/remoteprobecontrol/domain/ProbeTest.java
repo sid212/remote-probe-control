@@ -76,4 +76,15 @@ public class ProbeTest {
         );
     }
 
+    @Test
+    void probeWithEmptyCommandsDoesNotMove() {
+        Grid grid = new Grid(5,5);
+        Probe probe = new Probe(new Position(0,0), Direction.NORTH, grid);
+
+        Probe result = probe.execute("");
+
+        assertEquals(new Position(0,0), result.getPosition());
+        assertEquals(1, result.getVisited().size());
+    }
+
 }
