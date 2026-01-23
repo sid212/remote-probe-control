@@ -49,6 +49,13 @@ public class ProbeController {
                 grid
         );
 
+        if (!request.commands().matches("[FBLR]*")) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Invalid command sequence"
+            );
+        }
+
         Probe result = probe.execute(request.commands());
 
         List<PositionDto> visited = result.getVisited().stream()
