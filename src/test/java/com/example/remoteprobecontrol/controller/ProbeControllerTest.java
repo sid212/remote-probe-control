@@ -102,7 +102,7 @@ public class ProbeControllerTest {
                 .andExpect(jsonPath("$.finalPosition.y").value(2))
                 .andExpect(jsonPath("$.direction").value("NORTH"));
     }
-
+    @Test
     void PassingInvalidGridShouldReturnBadRequest() throws Exception {
         String request = """
                 {
@@ -122,9 +122,6 @@ public class ProbeControllerTest {
         mockMvc.perform(post("/probe/execute")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(request))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.finalPosition.x").value(0))
-                .andExpect(jsonPath("$.finalPosition.y").value(0))
-                .andExpect(jsonPath("$.direction").value("NORTH"));
+                .andExpect(status().isBadRequest());
     }
 }
