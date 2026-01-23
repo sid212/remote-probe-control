@@ -20,6 +20,14 @@ The remote probe:
 
 ---
 
+## Assumptions
+- The probe cannot move outside the grid
+- The probe stops before obstacles
+- Only successful movements are recorded as visited positions
+- Turning does not change position
+
+---
+
 ## 🛠 Tech Stack
 
 - Java
