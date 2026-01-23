@@ -16,4 +16,14 @@ public class ProbeTest {
         assertEquals(Direction.NORTH, result.getDirection());
     }
 
+    @Test
+    void probeMovesBackwardInFacingDirection(){
+        Probe probe = new Probe(new Position(0,0), Direction.NORTH);
+
+        Probe result = probe.moveBackward();
+
+        assertEquals(new Position(0,-1), result.getPosition());
+        assertEquals(Direction.NORTH, result.getDirection());
+    }
+
 }
