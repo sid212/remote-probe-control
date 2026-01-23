@@ -16,6 +16,10 @@ public enum Direction {
         };
     }
 
+    public static Direction valueOf(Direction direction) {
+        return direction;
+    }
+
     public Direction turnLeft(){
         return switch (this) {
             case NORTH -> WEST;

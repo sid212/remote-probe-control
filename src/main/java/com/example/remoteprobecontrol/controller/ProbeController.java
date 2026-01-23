@@ -7,10 +7,12 @@ import com.example.remoteprobecontrol.domain.Direction;
 import com.example.remoteprobecontrol.domain.Grid;
 import com.example.remoteprobecontrol.domain.Position;
 import com.example.remoteprobecontrol.domain.Probe;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Set;
 import java.util.List;
@@ -32,10 +34,18 @@ public class ProbeController {
                 request.grid().height(),
                 obstacles
         );
-
+        Direction direction;
+        try{
+            direction = Direction.valueOf(request.start().direction());
+        }catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Invalid direction"
+            );
+        }
         Probe probe = new Probe(
                 new Position(request.start().x(), request.start().y()),
-                Direction.valueOf(request.start().direction()),
+                direction,
                 grid
         );
 
