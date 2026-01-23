@@ -19,6 +19,14 @@ public class Probe {
                 direction);
     }
 
+    public Probe turnLeft() {
+        return new Probe(position, direction.turnLeft());
+    }
+
+    public Probe turnRight() {
+        return new Probe(position, direction.turnRight());
+    }
+
     public Position getPosition() {
         return position;
     }
