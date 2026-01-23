@@ -6,8 +6,14 @@ public enum Direction {
     SOUTH,
     WEST;
 
-    public static Direction valueOf(Direction direction) {
-        return direction;
+    public static Direction from(String value) {
+        return switch (value.toUpperCase()) {
+            case "NORTH" -> NORTH;
+            case "EAST"  -> EAST;
+            case "SOUTH" -> SOUTH;
+            case "WEST"  -> WEST;
+            default -> throw new IllegalArgumentException("Invalid direction: " + value);
+        };
     }
 
     public Direction turnLeft(){
