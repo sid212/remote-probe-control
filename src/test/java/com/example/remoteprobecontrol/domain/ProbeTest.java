@@ -46,4 +46,14 @@ public class ProbeTest {
         assertEquals(Direction.EAST, result.getDirection());
     }
 
+    @Test
+    void probeExecutesSequenceOfCommands() {
+        Probe probe = new Probe(new Position(0,0), Direction.NORTH);
+
+        Probe result = probe.execute("FFR");
+
+        assertEquals(new Position(1,2), result.getPosition());
+        assertEquals(Direction.EAST, result.getDirection());
+    }
+
 }
