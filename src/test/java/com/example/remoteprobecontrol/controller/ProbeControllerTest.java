@@ -25,7 +25,7 @@ public class ProbeControllerTest {
           "grid": {
             "width": 5,
             "height": 5,
-            "obstacles": [[1,1]]
+            "obstacles": [{ "x": 1, "y": 1 }]
           },
           "start": {
             "x": 0,
