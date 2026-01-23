@@ -1,20 +1,38 @@
 package com.example.remoteprobecontrol.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Probe {
     private final Position position;
     private final Direction direction;
     private final Grid grid;
+    private final List<Position> visited;
 
     public Probe(Position position, Direction direction, Grid grid) {
+        this(position,direction,grid,List.of(position));
+    }
+
+    private Probe(Position position,
+                  Direction direction,
+                  Grid grid,
+                  List<Position> visited) {
         this.position = position;
         this.direction = direction;
         this.grid = grid;
+        this.visited = visited;
     }
 
     public Probe moveForward(){
         Position newPosition = position.moveForward(direction);
-        return grid.isValid(newPosition) ? new Probe(newPosition, direction, grid)
-                :this;
+        if (!grid.isValid(newPosition)) {
+            return this;
+        }
+
+        List<Position> newVisited = new ArrayList<>(visited);
+        newVisited.add(newPosition);
+
+        return new Probe(newPosition, direction, grid, newVisited);
     }
 
     public Probe moveBackward() {
@@ -41,6 +59,10 @@ public class Probe {
 
     public Grid getGrid() {
         return grid;
+    }
+
+    public List<Position> getVisited() {
+        return List.copyOf(visited);
     }
 
     public Probe execute(String commands) {
