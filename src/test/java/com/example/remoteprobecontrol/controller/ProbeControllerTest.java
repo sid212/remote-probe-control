@@ -44,4 +44,20 @@ public class ProbeControllerTest {
                 .andExpect(jsonPath("$.finalPosition.y").value(2))
                 .andExpect(jsonPath("$.direction").value("EAST"));
     }
+
+    @Test
+    void returnsBadRequestForInvalidDirection() throws Exception {
+        String request = """
+    {
+      "grid": { "width": 5, "height": 5, "obstacles": [] },
+      "start": { "x": 0, "y": 0, "direction": "UP" },
+      "commands": "FF"
+    }
+    """;
+
+        mockMvc.perform(post("/probe/execute")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request))
+                .andExpect(status().isBadRequest());
+    }
 }
