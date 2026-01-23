@@ -37,6 +37,56 @@ The remote probe:
 
 ---
 
+## Sample Request-Response
+### Request -
+    {
+    "grid": {
+        "width": 5,
+        "height": 5,
+        "obstacles": [
+            { "x": 1, "y": 1 }
+        ]
+    },
+    "start": {
+        "x": 0,
+        "y": 0,
+        "direction": "NORTH"
+    },
+    "commands": "FFFRF"
+    }
+### Response -
+    {
+    "finalPosition": {
+        "x": 1,
+        "y": 3
+    },
+    "direction": "EAST",
+    "visited": [
+        {
+            "x": 0,
+            "y": 0
+        },
+        {
+            "x": 0,
+            "y": 1
+        },
+        {
+            "x": 0,
+            "y": 2
+        },
+        {
+            "x": 0,
+            "y": 3
+        },
+        {
+            "x": 1,
+            "y": 3
+        }
+    ]
+    }
+
+---
+
 ## ▶️ How to Run
 
 ```bash
