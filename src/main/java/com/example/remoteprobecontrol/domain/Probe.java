@@ -14,6 +14,11 @@ public class Probe {
         return new Probe(newPosition, direction);
     }
 
+    public Probe moveBackward() {
+        return new Probe(position.moveBackward(direction),
+                direction);
+    }
+
     public Position getPosition() {
         return position;
     }
