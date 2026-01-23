@@ -6,9 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProbeTest {
 
+    Grid grid = new Grid(5,5);
     @Test
     void probeMovesForwardInFacingDirection(){
-        Probe probe = new Probe(new Position(0,0), Direction.NORTH);
+        Probe probe = new Probe(new Position(0,0), Direction.NORTH, grid);
 
         Probe result = probe.moveForward();
 
@@ -18,17 +19,17 @@ public class ProbeTest {
 
     @Test
     void probeMovesBackwardInFacingDirection(){
-        Probe probe = new Probe(new Position(0,0), Direction.NORTH);
+        Probe probe = new Probe(new Position(0,0), Direction.NORTH, grid);
 
         Probe result = probe.moveBackward();
 
-        assertEquals(new Position(0,-1), result.getPosition());
+        assertEquals(new Position(0,0), result.getPosition());
         assertEquals(Direction.NORTH, result.getDirection());
     }
 
     @Test
     void probeTurnsLeftWithoutChangingPosition(){
-        Probe probe = new Probe(new Position(1,1), Direction.NORTH);
+        Probe probe = new Probe(new Position(1,1), Direction.NORTH, grid);
 
         Probe result = probe.turnLeft();
 
@@ -38,7 +39,7 @@ public class ProbeTest {
 
     @Test
     void probeTurnsRightWithoutChangingPosition(){
-        Probe probe = new Probe(new Position(1,1), Direction.NORTH);
+        Probe probe = new Probe(new Position(1,1), Direction.NORTH, grid);
 
         Probe result = probe.turnRight();
 
@@ -48,7 +49,7 @@ public class ProbeTest {
 
     @Test
     void probeExecutesSequenceOfCommands() {
-        Probe probe = new Probe(new Position(0,0), Direction.NORTH);
+        Probe probe = new Probe(new Position(0,0), Direction.NORTH, grid);
 
         Probe result = probe.execute("FFR");
 
