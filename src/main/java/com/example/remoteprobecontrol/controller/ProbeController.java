@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -40,12 +41,17 @@ public class ProbeController {
 
         Probe result = probe.execute(request.commands());
 
+        List<PositionDto> visited = result.getVisited().stream()
+                .map(p -> new PositionDto(p.getX(), p.getY()))
+                .toList();
+
         return new ProbeResponse(
                 new PositionDto(
                         result.getPosition().getX(),
                         result.getPosition().getY()
                 ),
-                result.getDirection().name()
+                result.getDirection().name(),
+                visited
         );
 
     }

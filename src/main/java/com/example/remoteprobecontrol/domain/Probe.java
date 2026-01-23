@@ -37,16 +37,20 @@ public class Probe {
 
     public Probe moveBackward() {
         Position newPosition = position.moveBackward(direction);
-        return grid.isValid(newPosition) ? new Probe(newPosition,
-                direction, grid) : this;
+        if (!grid.isValid(newPosition)) {
+            return this;
+        }
+        List<Position> newVisited = new ArrayList<>(visited);
+        newVisited.add(newPosition);
+        return new Probe(newPosition,direction, grid,newVisited);
     }
 
     public Probe turnLeft() {
-        return new Probe(position, direction.turnLeft(), grid);
+        return new Probe(position, direction.turnLeft(), grid, visited);
     }
 
     public Probe turnRight() {
-        return new Probe(position, direction.turnRight(), grid);
+        return new Probe(position, direction.turnRight(), grid, visited);
     }
 
     public Position getPosition() {
